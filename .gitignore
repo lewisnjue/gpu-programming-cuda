@@ -1,2 +1,7 @@
 .secret/
 .secret
+build/*
+build/
+.build
+**/build/*
+**/build/
