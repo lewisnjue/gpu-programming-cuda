@@ -1,5 +1,5 @@
+#include <cstdio>
 #include <cuda_runtime.h>
-#include <iostream>
 //__global__ means this function will run on the device
 __global__ void hello_world(){
         int tid = threadIdx.x + blockIdx.x * blockDim.x;
@@ -8,7 +8,12 @@ __global__ void hello_world(){
 
 int main(){
         hello_world<<<1,10>>>(); // we will run one block with 10 threads
-        cudaDeviceSynchronize(); // because the divice code is aync we need to wait for it to finish
-        return 0;
-        }
+        cudaError_t error  =  cudaDeviceSynchronize(); // because the divice code is aync we need to wait for it to finish
+        if(error == cudaSuccess){
+                printf("no issue");
+        }else{
+              printf("there was an issue\n");
+      }
+return 0;
+}
 
